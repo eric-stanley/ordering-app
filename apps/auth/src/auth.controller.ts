@@ -1,8 +1,9 @@
-import { Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { Controller, Post, Res, UseFilters, UseGuards } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './current-user.decorator';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import JwtAuthGuard from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { User } from './users/schemas/user.schema';
@@ -13,6 +14,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @UseFilters(new HttpExceptionFilter())
   async login(
     @CurrentUser() user: User,
     @Res({ passthrough: true }) response: Response,
