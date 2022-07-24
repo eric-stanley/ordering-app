@@ -1,12 +1,12 @@
 import { Controller, Post, Res, UseFilters, UseGuards } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Response } from 'express';
-import { AuthService } from './auth.service';
-import { CurrentUser } from './current-user.decorator';
-import { HttpExceptionFilter } from './exceptions/http-exception.filter';
-import JwtAuthGuard from './guards/jwt-auth.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { User } from './users/schemas/user.schema';
+import { AuthService } from '../services/auth.service';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { HttpExceptionFilter } from '../exceptions/http-exception.filter';
+import JwtAuthGuard from '../guards/jwt-auth.guard';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
+import { User } from '../users/schemas/user.schema';
 
 @Controller('auth')
 export class AuthController {

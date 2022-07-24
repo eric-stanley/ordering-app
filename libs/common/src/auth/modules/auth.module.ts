@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
-import { RmqModule } from '../rmq/rmq.module';
-import { AUHT_SERVICE } from './constants/services';
+import { RmqModule } from '../../rmq/modules/rmq.module';
+import { AUHT_SERVICE } from '../constants/services';
 
 @Module({
   imports: [

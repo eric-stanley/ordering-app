@@ -4,9 +4,9 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UsersRepository } from './users.repository';
-import { CreateUserRequest } from './dto/create-user.request';
-import { User } from './schemas/user.schema';
+import { UsersRepository } from '../repositories/users.repository';
+import { CreateUserRequest } from '../dto/create-user.request';
+import { User } from '../schemas/user.schema';
 
 @Injectable()
 export class UsersService {

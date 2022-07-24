@@ -1,8 +1,8 @@
 import { JwtAuthGuard, RmqService } from '@app/common';
 import { Controller, UseGuards } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
-import { BillingService } from './billing.service';
-import { CreateBillingRequest } from './dto/create-billing.request';
+import { BillingService } from '../services/billing.service';
+import { CreateBillingRequest } from '../dto/create-billing.request';
 
 @Controller()
 export class BillingController {
