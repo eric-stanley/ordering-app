@@ -3,7 +3,7 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { UsersRepository } from '../repositories/users.repository';
 import { CreateUserRequest } from '../dto/create-user.request';
 import { User } from '../schemas/user.schema';
@@ -17,6 +17,12 @@ export class UsersService {
     const user = await this.usersRepository.create({
       ...request,
       password: await bcrypt.hash(request.password, 10),
+      user_id: 0,
+      slug: '',
+      is_active: false,
+      password_changed_at: undefined,
+      password_reset_token: '',
+      password_reset_expires: '',
     });
     return user;
   }
