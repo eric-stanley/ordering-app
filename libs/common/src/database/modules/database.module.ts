@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CounterService } from '../services/counter.service';
 
 @Module({
   imports: [
@@ -11,5 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       inject: [ConfigService],
     }),
   ],
+  providers: [CounterService],
+  exports: [CounterService],
 })
 export class DatabaseModule {}

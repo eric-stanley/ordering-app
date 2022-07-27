@@ -5,3 +5,6 @@ export * from './rmq/services/rmq.service';
 export * from './rmq/modules/rmq.module';
 export * from './auth/modules/auth.module';
 export * from './auth/guards/jwt-auth.guard';
+export * from './database/repositories/counter.repository';
+export * from './database/schemas/counter.schema';
+export * from './database/services/counter.service';
