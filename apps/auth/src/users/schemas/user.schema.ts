@@ -3,11 +3,6 @@ import { AbstractDocument } from '@app/common';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
-import { CounterRepository } from '@app/common/database/repositories/counter.repository';
-import mongoose, { Model } from 'mongoose';
-import { Counter } from '@app/common/database/schemas/counter.schema';
-// import { AutoIncrement } from 'mongoose-sequence';
-import Inc from 'mongoose-sequence';
 
 @Schema({
   versionKey: false,
@@ -118,16 +113,6 @@ UserSchema.pre('save', async function (next) {
     next();
     return;
   }
-
-  // console.log('in user schema');
-  // new CounterRepository(new Model<Counter>()).autoSequenceModelID(
-  //   'users',
-  //   this,
-  //   'user_id',
-  //   1,
-  //   next,
-  // );
-  // this.counterRepository.autoSequenceModelID('users', this, 'user_id', 1, next);
   next();
 });
 
@@ -163,9 +148,6 @@ UserSchema.methods.createPasswordResetToken = function () {
 
   return resetToken;
 };
-
-// const AutoIncrement = Inc(UserSchema);
-// UserSchema.plugin(AutoIncrement, { id: 'user_id', inc_field: 'id' });
 
 UserSchema.plugin((schema: any) => {
   schema.options.toJSON = {

@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { Model, Connection } from 'mongoose';
-import { AbstractRepository } from '@app/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Counter } from '../schemas/counter.schema';
 import { AutoSequencer } from '../utils/auto-sequencer';
 
