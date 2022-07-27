@@ -17,10 +17,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     private readonly connection: Connection,
   ) {}
 
-  async create(
-    document: Omit<TDocument, '_id'>,
-    options?: SaveOptions,
-  ): Promise<TDocument> {
+  async create(document: any, options?: SaveOptions): Promise<TDocument> {
     const createdDocument = new this.model({
       ...document,
       _id: new Types.ObjectId(),
@@ -88,5 +85,32 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     const session = await this.connection.startSession();
     session.startTransaction();
     return session;
+  }
+
+  async autoSequenceModelID(
+    modelName: string,
+    doc: any,
+    idFieldName: string,
+    seq: number,
+    next: (arg0?: any) => any,
+  ) {
+    console.log('inside auto sequencer');
+    const counter = await this.model.findOneAndUpdate(
+      { collection_id: modelName },
+      { $inc: { seq } },
+    );
+
+    if (!counter) {
+      this.logger.warn(`No counter found with that name ${modelName}`, {
+        collection_id: modelName,
+      });
+
+      return next(
+        new NotFoundException(`No counter found with that name ${modelName}`),
+      );
+    }
+
+    doc[idFieldName] = seq;
+    if (seq === 1) next();
   }
 }

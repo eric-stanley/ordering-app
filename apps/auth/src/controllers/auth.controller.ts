@@ -3,10 +3,10 @@ import { MessagePattern } from '@nestjs/microservices';
 import { Response } from 'express';
 import { AuthService } from '../services/auth.service';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { HttpExceptionFilter } from '../exceptions/http-exception.filter';
 import JwtAuthGuard from '../guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { User } from '../users/schemas/user.schema';
+import { HttpExceptionFilter } from '../exceptions/http-exception.filter';
 
 @Controller('auth')
 export class AuthController {
@@ -14,7 +14,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  @UseFilters(new HttpExceptionFilter())
+  @UseFilters(HttpExceptionFilter)
   async login(
     @CurrentUser() user: User,
     @Res({ passthrough: true }) response: Response,
@@ -25,7 +25,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('logout')
-  @UseFilters(new HttpExceptionFilter())
+  @UseFilters(HttpExceptionFilter)
   async logout(
     @CurrentUser() user: User,
     @Res({ passthrough: true }) response: Response,

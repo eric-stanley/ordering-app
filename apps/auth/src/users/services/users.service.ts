@@ -16,13 +16,6 @@ export class UsersService {
     await this.validateCreateUserRequest(request);
     const user = await this.usersRepository.create({
       ...request,
-      password: await bcrypt.hash(request.password, 10),
-      user_id: 0,
-      slug: '',
-      is_active: false,
-      password_changed_at: undefined,
-      password_reset_token: '',
-      password_reset_expires: '',
     });
     return user;
   }
