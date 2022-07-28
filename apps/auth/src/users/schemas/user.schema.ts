@@ -3,7 +3,6 @@ import { AbstractDocument } from '@app/common';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
-import { CounterService } from '@app/common/database/services/counter.service';
 
 @Schema({
   versionKey: false,
@@ -111,7 +110,6 @@ UserSchema.pre('save', async function (next) {
     next();
     return;
   }
-  await CounterService.updateCounter('user_id');
   next();
 });
 

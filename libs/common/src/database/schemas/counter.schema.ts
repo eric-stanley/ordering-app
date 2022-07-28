@@ -1,7 +1,7 @@
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { AbstractDocument } from './abstract.schema';
 
-export class CounterDocument extends AbstractDocument {
+export class Counter extends AbstractDocument {
   @Prop({
     required: true,
   })
@@ -13,6 +13,6 @@ export class CounterDocument extends AbstractDocument {
   seq: number;
 }
 
-export const CounterSchema = SchemaFactory.createForClass(CounterDocument);
+export const CounterSchema = SchemaFactory.createForClass(Counter);
 
 CounterSchema.index({ collection_id: 1, seq: 1 }, { unique: true });

@@ -20,7 +20,7 @@ export class CreateUserRequest {
   @MaxLength(40)
   password: string;
 
-  // @IsEqualTo('password')
+  @IsEqualTo('password')
   password_confirm: string;
 
   @IsEmail()

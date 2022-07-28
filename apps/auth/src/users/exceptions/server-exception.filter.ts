@@ -18,12 +18,18 @@ export class ServerErrorExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const httpResponse: any =
+      exception instanceof HttpException ? exception.getResponse() : '';
+
     /**
      * @description Exception json response
      * @param message
      */
     const responseMessage = (type: string, message: string) => {
-      if (message.indexOf('Passwords are not the same') >= 0) {
+      if (
+        (httpResponse && httpResponse.message[0].indexOf('password') >= 0) ||
+        exception.message.indexOf('password') >= 0
+      ) {
         status = 400;
         message = 'Passwords are not the same';
       }

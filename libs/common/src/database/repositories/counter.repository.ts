@@ -1,18 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
-import { CounterDocument } from '../schemas/counter.schema';
+import { Counter } from '../schemas/counter.schema';
 import { AbstractRepository } from './abstract.repository';
 
 @Injectable()
-export class CounterRepository extends AbstractRepository<CounterDocument> {
+export class CounterRepository extends AbstractRepository<Counter> {
   protected readonly logger = new Logger(CounterRepository.name);
 
   constructor(
-    @InjectModel(CounterDocument.name) counterModel: Model<CounterDocument>,
+    @InjectModel(Counter.name) counterModel: Model<Counter>,
     @InjectConnection() connection: Connection,
   ) {
-    console.log('in counter repo');
     super(counterModel, connection);
   }
 }
