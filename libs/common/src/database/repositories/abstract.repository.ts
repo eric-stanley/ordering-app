@@ -89,7 +89,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
   async autoSequenceModelID(
     modelName: string,
-    doc: any,
+    doc: Partial<TDocument>,
     idFieldName: string,
     seq: number,
     next: (arg0?: any) => any,
